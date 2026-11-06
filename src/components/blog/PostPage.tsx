@@ -5,6 +5,8 @@ import { formatDate, getPosts, type Post } from "@/lib/posts";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PianoKeys, coverBg } from "@/components/PianoKeys";
+import { JsonLd } from "@/components/JsonLd";
+import { blogPostingLd, breadcrumbLd, faqLd } from "@/lib/structured-data";
 import { MdxContent } from "./MdxContent";
 import { TrialCard } from "./TrialCard";
 
@@ -23,6 +25,9 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
         bookHref="#trial"
       />
       <main className="flex-1">
+        <JsonLd data={blogPostingLd(locale, post)} />
+        <JsonLd data={breadcrumbLd(locale, post)} />
+        <JsonLd data={faqLd(post)} />
         <section className="mx-auto max-w-[1240px] px-4 pt-10 sm:px-8">
           <nav aria-label={t.breadcrumb} className="text-sm font-bold text-muted">
             <Link href={href(locale, "/blog/")} className="text-muted underline-offset-4 hover:underline">
@@ -63,6 +68,19 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
           <article className="w-full min-w-0 max-w-[700px] lg:flex-[999_1_560px]">
             <div className="article">
               <MdxContent source={post.body} locale={locale} />
+              {post.faq.length > 0 && (
+                <>
+                  <h2>{t.faqTitle}</h2>
+                  <div className="divide-y divide-line rounded-[22px] border border-line-strong bg-white">
+                    {post.faq.map((f) => (
+                      <div key={f.q} className="px-[22px] py-5">
+                        <h3 className="text-lg font-extrabold leading-snug text-ink">{f.q}</h3>
+                        <p className="mt-2 text-base leading-relaxed text-body">{f.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
             <div className="mt-10 flex items-center gap-4 border-t border-line pt-7 leading-normal">
               <span
@@ -74,6 +92,12 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
               <span>
                 <span className="block text-lg font-extrabold">{t.writtenBy}</span>
                 <span className="block text-[15px] text-muted">{t.authorBio}</span>
+                <Link
+                  href={`${href(locale, "/")}#teacher`}
+                  className="mt-1 inline-block text-[15px] font-bold text-accent underline-offset-4 hover:underline"
+                >
+                  {t.aboutAuthor}
+                </Link>
               </span>
             </div>
           </article>

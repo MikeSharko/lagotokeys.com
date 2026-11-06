@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PostPage } from "@/components/blog/PostPage";
 import { getPost, getSlugs } from "@/lib/posts";
 import { pageMetadata } from "@/lib/seo";
+import { getDictionary } from "@/i18n";
 
 const locale = "en";
 
@@ -22,9 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     locale,
     path: `/blog/${slug}/`,
-    title: post.title,
-    description: post.excerpt,
-    type: "article",
+    title: post.seoTitle,
+    description: post.description,
+    article: {
+      publishedTime: post.date,
+      modifiedTime: post.updated,
+      author: getDictionary(locale).teacher.name,
+    },
   });
 }
 

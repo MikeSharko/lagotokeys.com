@@ -3,9 +3,9 @@ const en = {
     homeTitle: "LegatoKeys — Private Piano Lessons in Rancho Peñasquitos, San Diego",
     homeDescription:
       "One-on-one piano lessons with Katerina, a St. Petersburg Conservatory graduate with 30 years of teaching experience. In-person lessons for kids, teens and adults in a home studio in Rancho Peñasquitos, San Diego.",
-    blogTitle: "Blog — Tips from the piano bench",
+    blogTitle: "Piano Tips for Parents & Beginners in San Diego",
     blogDescription:
-      "Practice ideas, advice for parents and music worth learning, written by piano teacher Katerina.",
+      "Piano practice routines, advice for parents and beginner pieces from Katerina, a St. Petersburg Conservatory–trained piano teacher in Rancho Peñasquitos, San Diego.",
     notFoundTitle: "Page not found",
   },
 
@@ -156,6 +156,8 @@ const en = {
       "St. Petersburg Conservatory graduate with 30 years of teaching experience. Teaches kids, teens and adults in her home studio in San Diego.",
     coverAlt: "Cover illustration: piano keys",
     tip: "Teacher's tip",
+    faqTitle: "Frequently asked questions",
+    aboutAuthor: "More about Katerina",
     min: "min",
   },
 

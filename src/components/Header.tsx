@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 import { getDictionary, href, type Locale } from "@/i18n";
+import { Icon } from "./Icon";
 import { Logo } from "./Logo";
 
 type Props = {
@@ -36,7 +37,7 @@ export function Header({ locale, alternates, active, bookHref }: Props) {
               key={item.href}
               href={item.href}
               aria-current={item.current ? "page" : undefined}
-              className={`shrink-0 rounded-full px-4 py-2.5 no-underline transition-colors hover:bg-sand ${
+              className={`shrink-0 rounded-full px-4 py-2.5 lg:px-3 xl:px-4 no-underline transition-colors hover:bg-sand ${
                 item.current ? "bg-sand" : ""
               }`}
             >
@@ -47,10 +48,19 @@ export function Header({ locale, alternates, active, bookHref }: Props) {
 
         <div className="flex items-center gap-3">
           <LanguageSwitch locale={locale} alternates={alternates} label={t.nav.language} />
+          {/* Phone: full number where the header has room, icon button where it is tight (phones and 1024–1280px) */}
           <a
             href={`tel:${site.phone.tel}`}
-            className="hidden text-[15px] font-semibold no-underline xl:inline"
+            aria-label={site.phone.display}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong no-underline hover:bg-sand sm:hidden lg:flex xl:hidden"
           >
+            <Icon name="phone" size={18} />
+          </a>
+          <a
+            href={`tel:${site.phone.tel}`}
+            className="hidden items-center gap-2 whitespace-nowrap text-[15px] font-semibold no-underline hover:underline sm:inline-flex lg:hidden xl:inline-flex"
+          >
+            <Icon name="phone" size={16} />
             {site.phone.display}
           </a>
           <Link

@@ -7,8 +7,8 @@ export const site = {
 
   email: "hello@legatokeys.com", // TODO: confirm this mailbox exists
   phone: {
-    display: "[Phone]", // TODO: e.g. "(858) 555-0123"
-    tel: "+10000000000", // TODO: digits only, with +1
+    display: "(619) 647-5217",
+    tel: "+16196475217",
   },
 
   // Prices in USD, shown as "$<value>"

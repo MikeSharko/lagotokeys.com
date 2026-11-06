@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/config/site";
 import { alternatesFor, href, type Locale } from "@/i18n";
+import { ogImage } from "./structured-data";
 
 type PageSeo = {
   locale: Locale;
@@ -10,12 +11,14 @@ type PageSeo = {
   description: string;
   /** Use the title as-is instead of the "%s | LegatoKeys" template */
   absoluteTitle?: boolean;
-  type?: "website" | "article";
+  article?: { publishedTime: string; modifiedTime: string; author: string };
 };
 
-// Canonical URL + hreflang links so Google treats EN and RU as translations of each other
-export function pageMetadata({ locale, path, title, description, absoluteTitle, type = "website" }: PageSeo): Metadata {
+// Canonical URL + hreflang links so Google treats EN and RU as translations of each other,
+// plus Open Graph / Twitter cards for link previews in messengers and social apps
+export function pageMetadata({ locale, path, title, description, absoluteTitle, article }: PageSeo): Metadata {
   const alt = alternatesFor(path);
+  const image = { url: ogImage(locale), width: 1200, height: 630, alt: site.name };
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -24,13 +27,23 @@ export function pageMetadata({ locale, path, title, description, absoluteTitle, 
       languages: { en: alt.en, ru: alt.ru, "x-default": alt.en },
     },
     openGraph: {
-      type,
       url: href(locale, path),
       siteName: site.name,
       title,
       description,
       locale: locale === "ru" ? "ru_RU" : "en_US",
+      alternateLocale: locale === "ru" ? "en_US" : "ru_RU",
+      images: [image],
+      ...(article
+        ? {
+            type: "article",
+            publishedTime: article.publishedTime,
+            modifiedTime: article.modifiedTime,
+            authors: [article.author],
+          }
+        : { type: "website" }),
     },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
   };
 }
 
