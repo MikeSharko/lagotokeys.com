@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   output: "export",
   // /about -> /about/index.html, so S3 serves folder-style URLs without rewrites
   trailingSlash: true,
+  experimental: {
+    // One 404 page for the whole site; needed because EN and RU have separate root layouts
+    globalNotFound: true,
+  },
   images: {
     // The Next image optimizer needs a server; static hosting can't run it
     unoptimized: true,

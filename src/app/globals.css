@@ -1,18 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #fbfaf8;
-  --foreground: #1a1a1a;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+/* Design tokens from the "Studio" direction */
+@theme {
   --font-sans: "Manrope Variable", system-ui, sans-serif;
+
+  --color-ink: #1a1a1a;
+  --color-body: #4a4a4a;
+  --color-muted: #6a6a6a;
+  --color-page: #fbfaf7;
+  --color-sand: #f3f1ec;
+  --color-line: #ece9e3;
+  --color-line-strong: #e2ded6;
+  --color-input: #c9c4ba;
+
+  --color-accent: #7b2d63;
+  --color-accent-soft: #7b2d631a;
+  --color-accent-tint: #e7c9dc;
+
+  /* Pastel illustration backgrounds */
+  --color-butter: #f6e6c8;
+  --color-sky: #dce7f2;
+  --color-sage: #e4ebdd;
+  --color-rose: #efe0ea;
+
+  --shadow-pill: 0 6px 20px rgba(26, 26, 26, 0.08);
+  --shadow-float: 0 16px 40px rgba(26, 26, 26, 0.14);
+  --shadow-card: 0 10px 40px rgba(26, 26, 26, 0.12);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+/* Base styles go in the base layer so Tailwind utilities (text-white etc.) can override them */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Hide scrollbars on horizontally scrolling chip rows */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Blog article body (rendered from MDX) */
+.article {
+  color: #2a2a2a;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.article > p {
+  margin: 0 0 22px;
+}
+.article > p:first-child {
+  font-size: 21px;
+  line-height: 1.6;
+  color: var(--color-ink);
+  font-weight: 500;
+}
+.article h2 {
+  margin: 44px 0 14px;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.article ul,
+.article ol {
+  margin: 0 0 22px;
+  padding-left: 1.4em;
+}
+.article li {
+  margin: 0 0 8px;
+}
+.article strong {
+  color: var(--color-ink);
+  font-weight: 800;
+}
+.article a {
+  color: var(--color-accent);
+  text-underline-offset: 3px;
 }
