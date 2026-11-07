@@ -44,6 +44,9 @@ export const site = {
     "Sabre Springs",
     "Torrey Highlands",
     "Black Mountain Ranch",
+    "Rancho Bernardo",
+    "4S Ranch",
+    "Scripps Ranch",
   ],
 
   googleBusinessUrl: "", // TODO: paste the Google Business Profile link once it exists

@@ -160,6 +160,10 @@ function Lessons({ locale }: { locale: Locale }) {
   const prices = [site.price.lesson30, site.price.lesson30, site.price.lesson30, site.price.lesson60];
   return (
     <section id="lessons" className={`${container} scroll-mt-6 pb-20`}>
+      <div className="mb-7">
+        <h2 className={h2}>{t.title}</h2>
+        <p className="mt-2 max-w-[640px] text-[17px] text-muted">{t.lead}</p>
+      </div>
       <div className="no-scrollbar flex gap-8 overflow-x-auto border-b border-line pb-0.5">
         {t.chips.map((label, i) => (
           <span
@@ -197,7 +201,7 @@ function Lessons({ locale }: { locale: Locale }) {
                 <Icon name="heart" size={18} />
               </span>
             </span>
-            <span className="text-[17px] font-extrabold">{card.title}</span>
+            <h3 className="text-[17px] font-extrabold leading-snug">{card.title}</h3>
             <span className="-mt-1.5 text-[15px] text-muted">{card.meta}</span>
             <span className="text-[15px]">
               <span className="font-extrabold">${prices[i]}</span> {t.perLesson}

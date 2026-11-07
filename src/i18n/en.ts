@@ -1,8 +1,8 @@
 const en = {
   meta: {
-    homeTitle: "LegatoKeys — Private Piano Lessons in Rancho Peñasquitos, San Diego",
+    homeTitle: "Piano Lessons in San Diego (Rancho Peñasquitos) | LegatoKeys",
     homeDescription:
-      "One-on-one piano lessons with Katerina, a St. Petersburg Conservatory graduate with 30 years of teaching experience. In-person lessons for kids, teens and adults in a home studio in Rancho Peñasquitos, San Diego.",
+      "Piano lessons for kids, teens and adults in San Diego. Conservatory-trained teacher, lessons in English or Russian, home studio in Rancho Peñasquitos.",
     blogTitle: "Piano Tips for Parents & Beginners in San Diego",
     blogDescription:
       "Piano practice routines, advice for parents and beginner pieces from Katerina, a St. Petersburg Conservatory–trained piano teacher in Rancho Peñasquitos, San Diego.",
@@ -32,7 +32,7 @@ const en = {
   hero: {
     badge: "Now enrolling new students",
     title: "Private piano lessons, made around you.",
-    lead: "One-on-one lessons with Katerina for kids, teens and adults — in person, in a warm and welcoming home studio in San Diego.",
+    lead: "Private piano lessons in San Diego with Katerina — for kids, teens and adults, from total beginners to advanced. In person, at a warm and welcoming home studio in Rancho Peñasquitos.",
     stats: [
       // "\n" = where the label breaks in the hero row (shown as one line on phones)
       { value: "30 yrs", label: "teaching\npiano" },
@@ -56,10 +56,12 @@ const en = {
       "Concerts",
       "Music theory",
     ],
+    title: "Piano lessons for kids, teens and adults",
+    lead: "Beginner piano lessons through advanced repertoire — classical piano, pop and film music. 30 or 60 minutes, once a week.",
     cards: [
-      { title: "First steps for young kids", meta: "30 min · weekly", badge: "Most popular" },
-      { title: "Teens: technique & repertoire", meta: "30 or 60 min · weekly", badge: "" },
-      { title: "Adults, from zero", meta: "30 or 60 min · weekly", badge: "New" },
+      { title: "First piano lessons for kids", meta: "30 min · weekly", badge: "Most popular" },
+      { title: "Piano lessons for teens", meta: "30 or 60 min · weekly", badge: "" },
+      { title: "Piano lessons for adults", meta: "30 or 60 min · weekly", badge: "New" },
       { title: "Advanced & concert repertoire", meta: "60 min · weekly", badge: "" },
     ],
     perLesson: "/ lesson",
@@ -78,7 +80,7 @@ const en = {
       { value: "250+", label: "Students taught" },
       { value: "St. Petersburg", label: "Conservatory graduate" },
     ],
-    title: "Meet your teacher",
+    title: "Your piano teacher in San Diego",
     text: "Katerina is a graduate of the St. Petersburg Conservatory and has been teaching piano for 30 years. More than 250 students — young beginners, teens and adults — have learned to play with her, one lesson at a time.",
     perks: [
       {
@@ -91,7 +93,7 @@ const en = {
       },
       {
         title: "Lessons in English & Russian",
-        text: "Comfortable for kids and parents alike — including bilingual families.",
+        text: "A Russian-speaking piano teacher in San Diego — comfortable for kids and parents alike, including bilingual families.",
       },
     ],
   },
@@ -107,7 +109,7 @@ const en = {
   studio: {
     photo: "Photo — the piano room at home",
     inPerson: "In-person lessons only",
-    title: "Lessons in a home studio",
+    title: "Piano lessons in Rancho Peñasquitos",
     text: (piano: string) =>
       `Every lesson happens in person, in Katerina's home, at a real ${piano} piano. A calm, familiar space where students feel at ease, and where good posture, touch and sound come naturally.`,
     area: "Rancho Peñasquitos, San Diego, CA",
@@ -123,6 +125,9 @@ const en = {
       "Sabre Springs",
       "Mira Mesa",
       "Poway",
+      "Rancho Bernardo",
+      "4S Ranch",
+      "Scripps Ranch",
     ],
   },
 
@@ -134,7 +139,7 @@ const en = {
 
   cta: {
     title: "Your first lesson starts with a hello.",
-    text: "Book a 30-minute trial — no commitment, no pressure.",
+    text: "Book a 30-minute trial piano lesson — no commitment, no pressure.",
     book: "Book a trial lesson",
     call: "Call or text",
   },
