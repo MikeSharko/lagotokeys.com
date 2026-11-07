@@ -8,6 +8,8 @@ import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/components/icons";
 import { PianoKeys, coverBg, type CoverColor } from "@/components/PianoKeys";
+import { JsonLd } from "@/components/JsonLd";
+import { localBusinessLd } from "@/lib/structured-data";
 
 const container = "mx-auto max-w-[1240px] px-4 sm:px-8";
 const h2 = "text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] sm:text-[40px]";
@@ -18,6 +20,7 @@ export function HomePage({ locale }: { locale: Locale }) {
     <>
       <Header locale={locale} alternates={alternatesFor("/")} />
       <main className="flex-1">
+        <JsonLd data={localBusinessLd(locale)} />
         <SearchPill locale={locale} />
         <Hero locale={locale} />
         <Lessons locale={locale} />
@@ -99,14 +102,17 @@ function Hero({ locale }: { locale: Locale }) {
           {t.title}
         </h1>
         <p className="mt-6 max-w-[500px] text-[19px] text-body">{t.lead}</p>
-        <div className="mt-9 flex flex-wrap gap-x-7 gap-y-4">
+        {/* One row with dividers from sm up; a plain stack on phones (no dangling divider when it wraps) */}
+        <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:gap-0">
           {t.stats.map((s, i) => (
-            <div key={s.label} className="flex gap-7">
-              {i > 0 && <div aria-hidden="true" className="w-px bg-line-strong" />}
-              <div>
-                <p className="text-[28px] font-extrabold tracking-[-0.02em]">{s.value}</p>
-                <p className="text-sm font-semibold text-muted">{s.label}</p>
-              </div>
+            <div
+              key={s.label}
+              className={`sm:px-5 sm:first:pl-0 sm:last:pr-0 lg:px-4 xl:px-5 ${i > 0 ? "sm:border-l sm:border-line-strong" : ""}`}
+            >
+              <p className="whitespace-nowrap text-2xl font-extrabold tracking-[-0.02em] lg:text-[22px] xl:text-[26px]">
+                {s.value}
+              </p>
+              <p className="text-sm font-semibold leading-snug text-muted sm:whitespace-pre-line lg:text-[13px] xl:text-sm">{s.label}</p>
             </div>
           ))}
         </div>

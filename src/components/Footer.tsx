@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { site } from "@/config/site";
 import { getDictionary, href, type Locale } from "@/i18n";
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -29,6 +30,11 @@ export function Footer({ locale }: { locale: Locale }) {
         <div>
           <p className="text-xl font-extrabold text-accent">legatokeys</p>
           <p className="mt-1.5 text-muted">{t.tagline}</p>
+          {/* Name, area and phone match the Google Business Profile */}
+          <p className="mt-3 text-body">{t.area}</p>
+          <a href={`tel:${site.phone.tel}`} className="mt-1 inline-block font-bold no-underline hover:underline">
+            {site.phone.display}
+          </a>
         </div>
         <div className="flex flex-wrap gap-12">
           {columns.map((col) => (

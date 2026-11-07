@@ -34,9 +34,10 @@ const en = {
     title: "Private piano lessons, made around you.",
     lead: "One-on-one lessons with Katerina for kids, teens and adults — in person, in a warm and welcoming home studio in San Diego.",
     stats: [
-      { value: "30 yrs", label: "teaching piano" },
-      { value: "St. Petersburg", label: "Conservatory graduate" },
-      { value: "EN · RU", label: "lessons in both languages" },
+      // "\n" = where the label breaks in the hero row (shown as one line on phones)
+      { value: "30 yrs", label: "teaching\npiano" },
+      { value: "St. Petersburg", label: "Conservatory\ngraduate" },
+      { value: "EN · RU", label: "lessons in\nboth languages" },
     ],
     illustration: "Illustration of piano keys",
     trialTitle: "Trial lesson · 30 min",
@@ -187,6 +188,7 @@ const en = {
 
   footer: {
     tagline: "Private piano lessons in San Diego, CA",
+    area: "Rancho Peñasquitos, San Diego, CA",
     lessons: "Lessons",
     kids: "Kids",
     teens: "Teens",

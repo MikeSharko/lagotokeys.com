@@ -27,4 +27,24 @@ export const site = {
     en: "[acoustic / grand]", // TODO: fills "at a real ___ piano", e.g. "Yamaha grand"
     ru: "[пианино / рояле]", // TODO: fills "на настоящем ___", e.g. "рояле Yamaha"
   },
+
+  // Used in the local-business markup Google reads. Keep it identical to the Google Business Profile.
+  address: {
+    streetAddress: "", // TODO: fill only if the Google profile shows the street address; leave "" to keep it private
+    city: "San Diego",
+    region: "CA",
+    postalCode: "", // TODO: the studio's ZIP code
+    country: "US",
+  },
+  areaServed: [
+    "Rancho Peñasquitos",
+    "Poway",
+    "Mira Mesa",
+    "Carmel Mountain",
+    "Sabre Springs",
+    "Torrey Highlands",
+    "Black Mountain Ranch",
+  ],
+
+  googleBusinessUrl: "", // TODO: paste the Google Business Profile link once it exists
 } as const;

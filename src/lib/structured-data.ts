@@ -63,6 +63,38 @@ export function breadcrumbLd(locale: Locale, post: Post) {
   };
 }
 
+// The studio as a local business, for the home pages. Mirrors the Google Business Profile
+// (same name, area and phone) so Google can connect the site and the Maps listing.
+export function localBusinessLd(locale: Locale) {
+  const d = getDictionary(locale);
+  const { address } = site;
+  const sameAs = [site.googleBusinessUrl].filter(Boolean);
+  return {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "MusicSchool"],
+    "@id": `${site.url}/#business`,
+    name: site.name,
+    description: d.meta.homeDescription,
+    url: abs(href(locale, "/")),
+    telephone: site.phone.tel,
+    email: site.email,
+    image: ogImage(locale),
+    logo: abs("/og/logo.png"),
+    address: {
+      "@type": "PostalAddress",
+      ...(address.streetAddress ? { streetAddress: address.streetAddress } : {}),
+      addressLocality: address.city,
+      addressRegion: address.region,
+      ...(address.postalCode ? { postalCode: address.postalCode } : {}),
+      addressCountry: address.country,
+    },
+    areaServed: site.areaServed.map((name) => ({ "@type": "Place", name: `${name}, ${address.region}` })),
+    knowsLanguage: ["en", "ru"],
+    founder: author(locale),
+    ...(sameAs.length ? { sameAs } : {}),
+  };
+}
+
 // Google shows FAQ rich results only for a few authoritative sites now,
 // but the markup still helps search engines and AI answers match questions to the page
 export function faqLd(post: Post) {
