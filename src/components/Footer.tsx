@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/config/site";
+import { BrandMark, Wordmark } from "./BrandMark";
 import { getDictionary, href, type Locale } from "@/i18n";
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -28,7 +29,10 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="border-t border-line bg-sand">
       <div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-8 px-4 py-10 text-[15px] sm:px-8">
         <div>
-          <p className="text-xl font-extrabold text-accent">legatokeys</p>
+          <p className="flex items-center gap-2.5">
+            <BrandMark size={30} />
+            <Wordmark className="text-base" />
+          </p>
           <p className="mt-1.5 text-muted">{t.tagline}</p>
           {/* Name, area and phone match the Google Business Profile */}
           <p className="mt-3 text-body">{t.area}</p>

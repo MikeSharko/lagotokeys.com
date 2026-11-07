@@ -4,6 +4,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/i18n";
+import { BrandMark, Wordmark } from "@/components/BrandMark";
 
 const en = getDictionary("en");
 const ru = getDictionary("ru");
@@ -16,7 +17,10 @@ export default function GlobalNotFound() {
   return (
     <html lang="en" className="antialiased">
       <body className="flex min-h-screen flex-col items-center justify-center gap-10 px-4 py-16 text-center">
-        <span className="text-[22px] font-extrabold tracking-[-0.02em] text-accent">legatokeys</span>
+        <span className="flex items-center gap-2.5">
+          <BrandMark size={36} />
+          <Wordmark className="text-[19px]" />
+        </span>
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-extrabold tracking-[-0.03em]">{en.notFound.title}</h1>
           <p className="text-lg text-body">{en.notFound.text}</p>
