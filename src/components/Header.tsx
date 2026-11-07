@@ -48,17 +48,17 @@ export function Header({ locale, alternates, active, bookHref }: Props) {
 
         <div className="flex items-center gap-3">
           <LanguageSwitch locale={locale} alternates={alternates} label={t.nav.language} />
-          {/* Phone: full number where the header has room, icon button where it is tight (phones and 1024–1280px) */}
+          {/* Phone: full number where the header has room, icon button where it is tight (<768px and 1024–1280px) */}
           <a
             href={`tel:${site.phone.tel}`}
             aria-label={site.phone.display}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong no-underline hover:bg-sand sm:hidden lg:flex xl:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong no-underline hover:bg-sand md:hidden lg:flex xl:hidden"
           >
             <Icon name="phone" size={18} />
           </a>
           <a
             href={`tel:${site.phone.tel}`}
-            className="hidden items-center gap-2 whitespace-nowrap text-[15px] font-semibold no-underline hover:underline sm:inline-flex lg:hidden xl:inline-flex"
+            className="hidden items-center gap-2 whitespace-nowrap text-[15px] font-semibold no-underline hover:underline md:inline-flex lg:hidden xl:inline-flex"
           >
             <Icon name="phone" size={16} />
             {site.phone.display}
@@ -92,7 +92,8 @@ function LanguageSwitch({
     <span
       role="group"
       aria-label={label}
-      className="inline-flex rounded-full border border-line-strong p-[3px] text-[13px] font-extrabold"
+      // Extra right margin separates the language switch from the phone link (gap 12px + 12px)
+      className="mr-1 inline-flex rounded-full border border-line-strong p-[3px] text-[13px] font-extrabold sm:mr-3"
     >
       {options.map((o) => {
         const isCurrent = o.code === locale;

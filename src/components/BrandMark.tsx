@@ -44,10 +44,11 @@ export function BrandMark({ size = 36, variant = "regular", className, label }: 
   );
 }
 
-// Wordmark: spaced capitals, "KEYS" in the accent color
+// Wordmark: spaced capitals, "KEYS" in the accent color.
+// Size and letter-spacing come from className (e.g. "text-base tracking-[0.12em]").
 export function Wordmark({ className, dark = false }: { className?: string; dark?: boolean }) {
   return (
-    <span className={`font-bold uppercase tracking-[0.12em] ${dark ? "text-white" : "text-ink"} ${className ?? ""}`}>
+    <span className={`font-bold uppercase ${dark ? "text-white" : "text-ink"} ${className ?? ""}`}>
       Legato<span className={dark ? "text-accent-tint" : "text-accent"}>Keys</span>
     </span>
   );

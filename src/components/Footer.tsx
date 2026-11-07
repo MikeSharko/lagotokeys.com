@@ -31,7 +31,7 @@ export function Footer({ locale }: { locale: Locale }) {
         <div>
           <p className="flex items-center gap-2.5">
             <BrandMark size={30} />
-            <Wordmark className="text-base" />
+            <Wordmark className="text-base tracking-[0.12em]" />
           </p>
           <p className="mt-1.5 text-muted">{t.tagline}</p>
           {/* Name, area and phone match the Google Business Profile */}

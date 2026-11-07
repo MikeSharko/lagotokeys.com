@@ -19,7 +19,7 @@ export default function GlobalNotFound() {
       <body className="flex min-h-screen flex-col items-center justify-center gap-10 px-4 py-16 text-center">
         <span className="flex items-center gap-2.5">
           <BrandMark size={36} />
-          <Wordmark className="text-[19px]" />
+          <Wordmark className="text-[19px] tracking-[0.12em]" />
         </span>
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-extrabold tracking-[-0.03em]">{en.notFound.title}</h1>
