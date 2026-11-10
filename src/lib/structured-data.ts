@@ -77,7 +77,6 @@ export function localBusinessLd(locale: Locale) {
     description: d.meta.homeDescription,
     url: abs(href(locale, "/")),
     telephone: site.phone.tel,
-    email: site.email,
     image: ogImage(locale),
     logo: abs("/og/logo.png"),
     address: {

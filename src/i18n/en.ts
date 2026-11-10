@@ -39,7 +39,7 @@ const en = {
       { value: "St. Petersburg", label: "Conservatory\ngraduate" },
       { value: "EN · RU", label: "lessons in\nboth languages" },
     ],
-    illustration: "Illustration of piano keys",
+    illustration: "A piano lesson with a young student in a home studio in Rancho Peñasquitos, San Diego",
     trialTitle: "Trial lesson · 30 min",
     trialText: "Meet, play, make a plan",
     fromPrice: (price: string) => `From $${price} / lesson`,
@@ -59,10 +59,10 @@ const en = {
     title: "Piano lessons for kids, teens and adults",
     lead: "Beginner piano lessons through advanced repertoire — classical piano, pop and film music. 30 or 60 minutes, once a week.",
     cards: [
-      { title: "First piano lessons for kids", meta: "30 min · weekly", badge: "Most popular" },
-      { title: "Piano lessons for teens", meta: "30 or 60 min · weekly", badge: "" },
-      { title: "Piano lessons for adults", meta: "30 or 60 min · weekly", badge: "New" },
-      { title: "Advanced & concert repertoire", meta: "60 min · weekly", badge: "" },
+      { title: "First piano lessons for kids", meta: "30 min · weekly", badge: "Most popular", alt: "Two children at a piano lesson with their teacher" },
+      { title: "Piano lessons for teens", meta: "30 or 60 min · weekly", badge: "", alt: "A teen student playing piano next to the teacher" },
+      { title: "Piano lessons for adults", meta: "30 or 60 min · weekly", badge: "New", alt: "An adult student at a grand piano lesson" },
+      { title: "Advanced & concert repertoire", meta: "60 min · weekly", badge: "", alt: "Playing a grand piano in the home studio" },
     ],
     perLesson: "/ lesson",
     whichLength: "Which length is right?",
@@ -107,7 +107,7 @@ const en = {
   },
 
   studio: {
-    photo: "Photo — the piano room at home",
+    photo: "The piano room of the home studio in Rancho Peñasquitos, with a grand piano and a lesson in progress",
     inPerson: "In-person lessons only",
     title: "Piano lessons in Rancho Peñasquitos",
     text: (piano: string) =>
@@ -186,9 +186,31 @@ const en = {
     note: "No commitment — just meet and play.",
     where: "In-person, home studio in Rancho Peñasquitos",
     callText: (phone: string) => `Or call / text ${phone}`,
-    emailSubject: "Trial piano lesson",
-    emailBody: (who: string, level: string) =>
-      `Hi Katerina,\n\nI'd like to book a trial lesson.\n\nWho's learning: ${who}\nExperience: ${level}\n\nThank you!`,
+  },
+
+  form: {
+    name: "Your name",
+    namePlaceholder: "First name is fine",
+    phone: "Phone",
+    email: "Email",
+    optional: "optional",
+    contactHint: "A phone number or an email — whichever you prefer.",
+    times: "Best days & times",
+    timesPlaceholder: "e.g. weekdays after 4 pm",
+    message: "Anything else?",
+    messagePlaceholder: "Age, goals, favorite music, questions…",
+    sending: "Sending…",
+    successTitle: "Thank you — your request is in!",
+    successText: "Katerina will get in touch soon to find a time that works.",
+    another: "Send another request",
+    errorName: "Please add your name.",
+    errorContact: "Add a phone number or an email so Katerina can reply.",
+    errorPhone: "This phone number doesn't look right.",
+    errorEmail: "This email doesn't look right.",
+    errorSend: "Sorry, the request didn't go through. Please try again, or call or text:",
+    call: "Call",
+    text: "Text",
+    perks: ["30 minutes, in person", "Meet the teacher and the piano", "Leave with a practice plan"],
   },
 
   footer: {

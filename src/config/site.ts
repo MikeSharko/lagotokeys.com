@@ -5,7 +5,6 @@ export const site = {
   url: "https://legatokeys.com",
   name: "LegatoKeys",
 
-  email: "hello@legatokeys.com", // TODO: confirm this mailbox exists
   phone: {
     display: "(619) 647-5217",
     tel: "+16196475217",
@@ -24,8 +23,8 @@ export const site = {
   },
 
   piano: {
-    en: "[acoustic / grand]", // TODO: fills "at a real ___ piano", e.g. "Yamaha grand"
-    ru: "[пианино / рояле]", // TODO: fills "на настоящем ___", e.g. "рояле Yamaha"
+    en: "grand", // fills "at a real ___ piano"
+    ru: "рояле", // fills "на настоящем ___"
   },
 
   // Used in the local-business markup Google reads. Keep it identical to the Google Business Profile.
@@ -50,4 +49,7 @@ export const site = {
   ],
 
   googleBusinessUrl: "", // TODO: paste the Google Business Profile link once it exists
+
+  // Booking form API: the BookingUrl printed by `npx cdk deploy` in infra/
+  bookingEndpoint: "https://9x39phys9c.execute-api.us-east-1.amazonaws.com/booking",
 } as const;

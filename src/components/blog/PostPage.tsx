@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { site } from "@/config/site";
 import { alternatesFor, getDictionary, href, type Locale } from "@/i18n";
 import { formatDate, getPosts, type Post } from "@/lib/posts";
 import { Header } from "@/components/Header";
@@ -102,25 +101,7 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
             </div>
           </article>
 
-          <TrialCard
-            email={site.email}
-            phone={site.phone}
-            price={site.price.trial}
-            labels={{
-              label: d.trial.label,
-              perTrial: d.trial.perTrial,
-              who: d.trial.who,
-              whoOptions: d.trial.whoOptions,
-              experience: d.trial.experience,
-              experienceOptions: d.trial.experienceOptions,
-              request: d.trial.request,
-              note: d.trial.note,
-              where: d.trial.where,
-              call: d.trial.callText(site.phone.display),
-              subject: d.trial.emailSubject,
-              body: d.trial.emailBody("{who}", "{level}"),
-            }}
-          />
+          <TrialCard locale={locale} />
         </section>
 
         {related.length > 0 && (

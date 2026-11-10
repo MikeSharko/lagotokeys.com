@@ -2,12 +2,14 @@ import Link from "next/link";
 import { site } from "@/config/site";
 import { alternatesFor, getDictionary, href, type Locale } from "@/i18n";
 import { getPosts } from "@/lib/posts";
-import { telHref, trialMailto } from "@/lib/contact";
+import { smsHref, telHref } from "@/lib/contact";
+import { BookingForm } from "@/components/BookingForm";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/components/icons";
-import { PianoKeys, coverBg, type CoverColor } from "@/components/PianoKeys";
+import { coverBg } from "@/components/PianoKeys";
+import { Photo, type PhotoName } from "@/components/Photo";
 import { JsonLd } from "@/components/JsonLd";
 import { localBusinessLd } from "@/lib/structured-data";
 
@@ -15,7 +17,6 @@ const container = "mx-auto max-w-[1240px] px-4 sm:px-8";
 const h2 = "text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] sm:text-[40px]";
 
 export function HomePage({ locale }: { locale: Locale }) {
-  const t = getDictionary(locale);
   return (
     <>
       <Header locale={locale} alternates={alternatesFor("/")} />
@@ -28,30 +29,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <Concerts locale={locale} />
         <Studio locale={locale} />
         <BlogTeaser locale={locale} />
-        <section id="book" className={`${container} pb-[88px]`}>
-          <div className="flex flex-wrap items-center justify-between gap-8 rounded-[32px] bg-ink p-8 text-white sm:p-14">
-            <div className="min-w-0 flex-[1_1_420px]">
-              <h2 className="text-[32px] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[44px]">
-                {t.cta.title}
-              </h2>
-              <p className="mt-3.5 text-lg text-[#c8c8c8]">{t.cta.text}</p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={trialMailto(locale)}
-                className="inline-flex min-h-11 items-center rounded-full bg-accent px-7 py-[18px] font-extrabold text-white no-underline hover:brightness-110"
-              >
-                {t.cta.book}
-              </a>
-              <a
-                href={telHref}
-                className="inline-flex min-h-11 items-center rounded-full bg-white px-7 py-[18px] font-extrabold text-ink no-underline hover:bg-sand"
-              >
-                {t.cta.call}
-              </a>
-            </div>
-          </div>
-        </section>
+        <BookSection locale={locale} />
       </main>
       <Footer locale={locale} />
     </>
@@ -120,11 +98,12 @@ function Hero({ locale }: { locale: Locale }) {
 
       <div className="relative min-w-0 flex-[1_1_460px]">
         <div className="aspect-[1/0.92] overflow-hidden rounded-[28px] bg-accent-soft">
-          <PianoKeys
-            preset="hero"
-            transform="rotate(-16 300 300) translate(-120 150)"
-            highlight={4}
-            label={t.illustration}
+          <Photo
+            name="hero-lesson"
+            alt={t.illustration}
+            sizes="(min-width: 1024px) 560px, 100vw"
+            position="62% 50%"
+            priority
             className="block h-full w-full"
           />
         </div>
@@ -147,11 +126,12 @@ function Hero({ locale }: { locale: Locale }) {
 
 const chipIcons: IconName[] = ["menu", "star", "music", "person", "classical", "film", "ticket", "book"];
 
-const lessonArt: { color: CoverColor; hit: "accent" | "ink"; tf: string }[] = [
-  { color: "butter", hit: "accent", tf: "rotate(-14 150 140) translate(-10 90)" },
-  { color: "sky", hit: "ink", tf: "rotate(10 150 140) translate(-30 70)" },
-  { color: "sage", hit: "accent", tf: "rotate(-6 150 140) translate(-20 110)" },
-  { color: "rose", hit: "ink", tf: "rotate(18 150 140) translate(-40 60)" },
+// One photo per lesson card (kids, teens, adults, advanced), with a focal point for the square crop
+const lessonPhotos: { name: PhotoName; position: string }[] = [
+  { name: "lesson-kids", position: "58% 50%" },
+  { name: "lesson-teens", position: "42% 50%" },
+  { name: "lesson-adults", position: "38% 50%" },
+  { name: "lesson-advanced", position: "50% 58%" },
 ];
 
 function Lessons({ locale }: { locale: Locale }) {
@@ -181,12 +161,12 @@ function Lessons({ locale }: { locale: Locale }) {
       <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
         {t.cards.map((card, i) => (
           <a key={card.title} href="#book" className="group flex flex-col gap-2.5 no-underline">
-            <span className={`relative block aspect-[1/0.95] overflow-hidden rounded-[18px] ${coverBg[lessonArt[i].color]}`}>
-              <PianoKeys
-                preset="card"
-                transform={lessonArt[i].tf}
-                highlight={2}
-                highlightColor={lessonArt[i].hit}
+            <span className="relative block aspect-[1/0.95] overflow-hidden rounded-[18px] bg-sand">
+              <Photo
+                name={lessonPhotos[i].name}
+                alt={card.alt}
+                sizes="(min-width: 1024px) 290px, (min-width: 640px) 50vw, 100vw"
+                position={lessonPhotos[i].position}
                 className="block h-full w-full transition-transform duration-300 group-hover:scale-[1.03]"
               />
               {card.badge && (
@@ -346,9 +326,13 @@ function Studio({ locale }: { locale: Locale }) {
   return (
     <section id="studio" className={`${container} flex scroll-mt-6 flex-wrap items-center gap-14 pt-[88px]`}>
       <div className="relative min-w-0 flex-[1_1_460px]">
-        {/* TODO: replace with a real photo of the piano room (next/image, file in /public) */}
-        <div className="flex aspect-[4/3] items-end rounded-[28px] bg-[#efe9df] p-[22px] text-sm font-bold text-muted">
-          {t.photo}
+        <div className="aspect-[4/3] overflow-hidden rounded-[28px] bg-[#efe9df]">
+          <Photo
+            name="studio-room"
+            alt={t.photo}
+            sizes="(min-width: 1024px) 560px, 100vw"
+            className="block h-full w-full"
+          />
         </div>
         <div className="absolute right-5 top-5 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-extrabold shadow-[0_10px_30px_rgba(26,26,26,0.12)]">
           <span className="text-accent">
@@ -434,6 +418,46 @@ function BlogTeaser({ locale }: { locale: Locale }) {
             </span>
           </Link>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function BookSection({ locale }: { locale: Locale }) {
+  const t = getDictionary(locale);
+  const link =
+    "inline-flex min-h-11 items-center gap-2 rounded-full border border-white/25 px-5 font-bold text-white no-underline hover:bg-white/10";
+  return (
+    <section id="book" className={`${container} scroll-mt-6 pb-[88px]`}>
+      <div className="flex flex-wrap items-start gap-x-14 gap-y-10 rounded-[32px] bg-ink p-6 text-white sm:p-14">
+        <div className="min-w-0 flex-[1_1_360px] lg:pt-4">
+          <h2 className="text-[32px] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[44px]">{t.cta.title}</h2>
+          <p className="mt-3.5 text-lg text-[#c8c8c8]">{t.cta.text}</p>
+          <ul className="mt-7 flex flex-col gap-3 text-[17px]">
+            {t.form.perks.map((p) => (
+              <li key={p} className="flex items-center gap-3">
+                <span className="flex size-7 flex-none items-center justify-center rounded-full bg-accent">
+                  <Icon name="check" size={16} />
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-9 text-sm font-bold uppercase tracking-[0.06em] text-[#a8a8a8]">{t.cta.call}</p>
+          <div className="mt-3 flex flex-wrap gap-2.5">
+            <a href={telHref} className={link}>
+              <Icon name="phone" size={18} />
+              {site.phone.display}
+            </a>
+            <a href={smsHref} className={link}>
+              <Icon name="chat" size={18} />
+              {t.form.text}
+            </a>
+          </div>
+        </div>
+        <div className="w-full min-w-0 flex-[1_1_400px] rounded-3xl bg-white p-5 text-ink sm:p-7 lg:max-w-[520px]">
+          <BookingForm locale={locale} />
+        </div>
       </div>
     </section>
   );

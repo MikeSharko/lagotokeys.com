@@ -1,6 +1,5 @@
 import { alternatesFor, getDictionary, href, type Locale } from "@/i18n";
 import { getPosts, toMeta } from "@/lib/posts";
-import { trialMailto } from "@/lib/contact";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BlogIndex } from "./BlogIndex";
@@ -38,7 +37,7 @@ export function BlogPage({ locale }: { locale: Locale }) {
               <p className="mt-2.5 text-[17px] text-[#c8c8c8]">{d.blog.ctaText}</p>
             </div>
             <a
-              href={trialMailto(locale)}
+              href={`${href(locale)}#book`}
               className="inline-flex min-h-11 items-center rounded-full bg-accent px-7 py-[18px] font-extrabold text-white no-underline hover:brightness-110"
             >
               {d.cta.book}
