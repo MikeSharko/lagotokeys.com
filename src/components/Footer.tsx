@@ -53,6 +53,22 @@ export function Footer({ locale }: { locale: Locale }) {
           ))}
         </div>
       </div>
+      <div className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-x-6 gap-y-1.5 border-t border-line-strong px-4 py-5 text-sm text-muted sm:px-8">
+        <span>
+          © {new Date().getFullYear()} {site.name}
+        </span>
+        <span>
+          {t.madeBy}{" "}
+          <a
+            href="https://reactdev101.com"
+            target="_blank"
+            rel="noopener"
+            className="font-bold text-body no-underline hover:text-ink hover:underline"
+          >
+            reactdev101.com
+          </a>
+        </span>
+      </div>
     </footer>
   );
 }

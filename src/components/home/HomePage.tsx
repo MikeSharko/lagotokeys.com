@@ -10,6 +10,8 @@ import { Icon } from "@/components/Icon";
 import type { IconName } from "@/components/icons";
 import { coverBg } from "@/components/PianoKeys";
 import { Photo, type PhotoName } from "@/components/Photo";
+import { Avatar } from "@/components/Avatar";
+import { PostImage } from "@/components/blog/PostImage";
 import { JsonLd } from "@/components/JsonLd";
 import { localBusinessLd } from "@/lib/structured-data";
 
@@ -117,7 +119,7 @@ function Hero({ locale }: { locale: Locale }) {
           </span>
         </div>
         <div className="absolute right-5 top-6 rounded-full bg-white px-4 py-2.5 text-sm font-bold shadow-[0_10px_30px_rgba(26,26,26,0.12)]">
-          {t.fromPrice(site.price.lesson30)}
+          {t.lengthBadge}
         </div>
       </div>
     </section>
@@ -136,8 +138,6 @@ const lessonPhotos: { name: PhotoName; position: string }[] = [
 
 function Lessons({ locale }: { locale: Locale }) {
   const t = getDictionary(locale).lessons;
-  // The advanced card is 60-minute only; the rest start at the 30-minute price
-  const prices = [site.price.lesson30, site.price.lesson30, site.price.lesson30, site.price.lesson60];
   return (
     <section id="lessons" className={`${container} scroll-mt-6 pb-20`}>
       <div className="mb-7">
@@ -183,9 +183,6 @@ function Lessons({ locale }: { locale: Locale }) {
             </span>
             <h3 className="text-[17px] font-extrabold leading-snug">{card.title}</h3>
             <span className="-mt-1.5 text-[15px] text-muted">{card.meta}</span>
-            <span className="text-[15px]">
-              <span className="font-extrabold">${prices[i]}</span> {t.perLesson}
-            </span>
           </a>
         ))}
       </div>
@@ -215,12 +212,7 @@ function Teacher({ locale }: { locale: Locale }) {
         <div className="w-full min-w-0 flex-[0_1_400px]">
           <div className="flex items-center gap-7 rounded-[28px] bg-white p-8 shadow-card">
             <div className="flex-auto text-center">
-              <div
-                aria-hidden="true"
-                className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-accent-soft text-[40px] font-extrabold text-accent"
-              >
-                {t.name.charAt(0)}
-              </div>
+              <Avatar size={112} alt={t.photoAlt} className="mx-auto" />
               <p className="mt-3.5 text-2xl font-extrabold tracking-[-0.02em]">{t.name}</p>
               <p className="mt-0.5 text-sm font-semibold text-muted">{t.role}</p>
             </div>
@@ -233,6 +225,20 @@ function Teacher({ locale }: { locale: Locale }) {
               ))}
             </div>
           </div>
+
+          {/* Vintage snapshot styled as a pinned print: where the 30 years began */}
+          <figure className="relative mx-auto mt-8 w-[86%] max-w-[340px] -rotate-[2.5deg] bg-white p-3 pb-4 shadow-[0_14px_36px_rgba(26,26,26,0.16)] sm:mr-2">
+            <Photo
+              name="first-student"
+              alt={t.firstStudentAlt}
+              sizes="340px"
+              className="aspect-[10/7] w-full"
+              position="60% 40%"
+            />
+            <figcaption className="mt-3 px-1 text-center text-sm font-semibold leading-snug text-body">
+              {t.firstStudent}
+            </figcaption>
+          </figure>
         </div>
 
         <div className="min-w-0 flex-[1_1_440px]">
@@ -320,7 +326,7 @@ function Studio({ locale }: { locale: Locale }) {
   const t = getDictionary(locale).studio;
   const rows: { icon: IconName; title: string; note: string }[] = [
     { icon: "pin", title: t.area, note: t.areaNote },
-    { icon: "clock", title: site.hours[locale], note: t.hoursNote },
+    { icon: "clock", title: t.hours, note: t.hoursNote },
     { icon: "parking", title: t.parking, note: t.parkingNote },
   ];
   return (
@@ -401,13 +407,26 @@ function BlogTeaser({ locale }: { locale: Locale }) {
             href={href(locale, `/blog/${p.slug}/`)}
             className="flex flex-col overflow-hidden rounded-[22px] border border-line bg-white no-underline transition-shadow hover:shadow-card"
           >
-            <span aria-hidden="true" className={`relative block aspect-video overflow-hidden ${coverBg[p.color]}`}>
-              {/* Five-line staff with a single note */}
-              <span className="absolute inset-x-7 top-1/2 h-0.5 bg-ink/20 shadow-[0_-14px_0_rgba(26,26,26,0.2),0_14px_0_rgba(26,26,26,0.2),0_-28px_0_rgba(26,26,26,0.2),0_28px_0_rgba(26,26,26,0.2)]" />
-              <span
-                className="absolute top-[36%] h-[26px] w-[34px] -rotate-[20deg] rounded-full bg-ink"
-                style={{ left: noteX[i] }}
-              />
+            <span className={`relative block aspect-video overflow-hidden ${coverBg[p.color]}`}>
+              {p.image ? (
+                <PostImage
+                  image={p.image}
+                  alt={p.imageAlt}
+                  position={p.imagePosition}
+                  sizes="(min-width: 768px) 380px, 100vw"
+                  className="absolute inset-0 h-full w-full"
+                />
+              ) : (
+                <>
+                  {/* Five-line staff with a single note */}
+                  <span className="absolute inset-x-7 top-1/2 h-0.5 bg-ink/20 shadow-[0_-14px_0_rgba(26,26,26,0.2),0_14px_0_rgba(26,26,26,0.2),0_-28px_0_rgba(26,26,26,0.2),0_28px_0_rgba(26,26,26,0.2)]" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-[36%] h-[26px] w-[34px] -rotate-[20deg] rounded-full bg-ink"
+                    style={{ left: noteX[i] }}
+                  />
+                </>
+              )}
             </span>
             <span className="flex flex-col gap-2 px-[22px] pb-6 pt-5">
               <span className="text-xs font-extrabold uppercase tracking-[0.04em] text-accent">

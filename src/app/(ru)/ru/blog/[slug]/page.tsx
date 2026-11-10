@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { PostPage } from "@/components/blog/PostPage";
 import { getPost, getSlugs } from "@/lib/posts";
 import { pageMetadata } from "@/lib/seo";
+import { postImageUrls } from "@/components/blog/PostImage";
+import { site } from "@/config/site";
 import { getDictionary } from "@/i18n";
 
 const locale = "ru";
@@ -25,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/blog/${slug}/`,
     title: post.seoTitle,
     description: post.description,
+    image: post.image ? { url: postImageUrls(post.image, site.url)!.og, alt: post.imageAlt } : undefined,
     article: {
       publishedTime: post.date,
       modifiedTime: post.updated,

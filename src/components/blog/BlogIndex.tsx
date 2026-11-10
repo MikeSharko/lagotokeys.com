@@ -6,6 +6,8 @@ import { useMemo, useState } from "react";
 import { Icon } from "@/components/Icon";
 import type { IconName } from "@/components/icons";
 import { PianoKeys, coverBg } from "@/components/PianoKeys";
+import { PostImage } from "./PostImage";
+import { Avatar } from "@/components/Avatar";
 import type { CategoryKey, PostMeta } from "@/lib/posts";
 
 type Labels = {
@@ -112,13 +114,24 @@ export function BlogIndex({ posts, basePath, labels, categories }: Props) {
             href={`${basePath}${featured.slug}/`}
             className="group flex flex-wrap overflow-hidden rounded-[28px] border border-line bg-white no-underline"
           >
-            <span aria-hidden="true" className={`relative block min-h-[260px] min-w-0 flex-[1_1_480px] overflow-hidden sm:min-h-80 ${coverBg[featured.color]}`}>
-              <PianoKeys
-                preset="featured"
-                transform="rotate(-14 300 190) translate(-60 140)"
-                highlight={2}
-                className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
-              />
+            <span className={`relative block min-h-[260px] min-w-0 flex-[1_1_480px] overflow-hidden sm:min-h-80 ${coverBg[featured.color]}`}>
+              {featured.image ? (
+                <PostImage
+                  image={featured.image}
+                  alt={featured.imageAlt}
+                  position={featured.imagePosition}
+                  sizes="(min-width: 1240px) 640px, (min-width: 900px) 55vw, 100vw"
+                  priority
+                  className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              ) : (
+                <PianoKeys
+                  preset="featured"
+                  transform="rotate(-14 300 190) translate(-60 140)"
+                  highlight={2}
+                  className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              )}
               <span className="absolute left-5 top-5 rounded-full bg-white px-3 py-1.5 text-[13px] font-extrabold">
                 {labels.featured}
               </span>
@@ -132,12 +145,7 @@ export function BlogIndex({ posts, basePath, labels, categories }: Props) {
               </span>
               <span className="text-[17px] text-body">{featured.excerpt}</span>
               <span className="mt-1.5 flex items-center gap-2.5 text-sm font-bold">
-                <span
-                  aria-hidden="true"
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-[13px] font-extrabold text-accent"
-                >
-                  {labels.author.charAt(0)}
-                </span>
+                <Avatar size={32} />
                 {labels.author}
               </span>
             </span>
@@ -150,14 +158,24 @@ export function BlogIndex({ posts, basePath, labels, categories }: Props) {
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {grid.map((p) => (
               <Link key={p.slug} href={`${basePath}${p.slug}/`} className="group flex flex-col gap-3 no-underline">
-                <span aria-hidden="true" className={`relative block aspect-[16/11] overflow-hidden rounded-[20px] ${coverBg[p.color]}`}>
-                  <PianoKeys
-                    preset="thumb"
-                    transform={p.tilt}
-                    highlight={2}
-                    highlightColor={p.highlight}
-                    className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.03]"
-                  />
+                <span className={`relative block aspect-[16/11] overflow-hidden rounded-[20px] ${coverBg[p.color]}`}>
+                  {p.image ? (
+                    <PostImage
+                      image={p.image}
+                      alt={p.imageAlt}
+                      position={p.imagePosition}
+                      sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+                      className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <PianoKeys
+                      preset="thumb"
+                      transform={p.tilt}
+                      highlight={2}
+                      highlightColor={p.highlight}
+                      className="absolute inset-0 h-full w-full transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  )}
                 </span>
                 <span className="text-xs font-extrabold uppercase tracking-[0.04em] text-accent">
                   {categories[p.category]} · {minRead(p.readMinutes)}

@@ -5,8 +5,10 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PianoKeys, coverBg } from "@/components/PianoKeys";
 import { JsonLd } from "@/components/JsonLd";
+import { Avatar } from "@/components/Avatar";
 import { blogPostingLd, breadcrumbLd, faqLd } from "@/lib/structured-data";
 import { MdxContent } from "./MdxContent";
+import { PostImage } from "./PostImage";
 import { TrialCard } from "./TrialCard";
 
 export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
@@ -39,12 +41,7 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
           </h1>
           <div className="mt-[18px] flex flex-wrap items-center gap-x-[18px] gap-y-2.5 text-[15px] leading-[1.4]">
             <span className="flex items-center gap-2.5 font-extrabold">
-              <span
-                aria-hidden="true"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-sm text-accent"
-              >
-                {author.charAt(0)}
-              </span>
+              <Avatar size={36} />
               {author}
             </span>
             <span className="font-semibold text-muted">
@@ -52,14 +49,25 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
             </span>
           </div>
           <div className={`relative mt-7 aspect-[16/9] overflow-hidden rounded-[28px] sm:aspect-[16/6.5] ${coverBg[post.color]}`}>
-            <PianoKeys
-              preset="cover"
-              transform="rotate(-10 600 240) translate(-80 210)"
-              highlight={6}
-              highlightColor={post.highlight}
-              label={t.coverAlt}
-              className="absolute inset-0 h-full w-full"
-            />
+            {post.image ? (
+              <PostImage
+                image={post.image}
+                alt={post.imageAlt}
+                position={post.imagePosition}
+                sizes="(min-width: 1240px) 1176px, 100vw"
+                priority
+                className="absolute inset-0 h-full w-full"
+              />
+            ) : (
+              <PianoKeys
+                preset="cover"
+                transform="rotate(-10 600 240) translate(-80 210)"
+                highlight={6}
+                highlightColor={post.highlight}
+                label={t.coverAlt}
+                className="absolute inset-0 h-full w-full"
+              />
+            )}
           </div>
         </section>
 
@@ -82,12 +90,7 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
               )}
             </div>
             <div className="mt-10 flex items-center gap-4 border-t border-line pt-7 leading-normal">
-              <span
-                aria-hidden="true"
-                className="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-accent-soft text-[22px] font-extrabold text-accent"
-              >
-                {author.charAt(0)}
-              </span>
+              <Avatar size={64} />
               <span>
                 <span className="block text-lg font-extrabold">{t.writtenBy}</span>
                 <span className="block text-[15px] text-muted">{t.authorBio}</span>
@@ -115,7 +118,11 @@ export function PostPage({ locale, post }: { locale: Locale; post: Post }) {
                   className="flex items-center gap-4 rounded-[20px] border border-line bg-white p-3 leading-[1.35] no-underline transition-shadow hover:shadow-card"
                 >
                   <span aria-hidden="true" className={`relative h-24 w-24 flex-none overflow-hidden rounded-[14px] ${coverBg[p.color]}`}>
-                    <span className="absolute inset-x-0 bottom-0 h-[46%] bg-[repeating-linear-gradient(90deg,#fff_0_calc(20%-3px),transparent_calc(20%-3px)_20%)]" />
+                    {p.image ? (
+                      <PostImage image={p.image} alt="" position={p.imagePosition} sizes="96px" className="absolute inset-0 h-full w-full" />
+                    ) : (
+                      <span className="absolute inset-x-0 bottom-0 h-[46%] bg-[repeating-linear-gradient(90deg,#fff_0_calc(20%-3px),transparent_calc(20%-3px)_20%)]" />
+                    )}
                   </span>
                   <span>
                     <span className="block text-xs font-extrabold uppercase tracking-[0.04em] text-accent">

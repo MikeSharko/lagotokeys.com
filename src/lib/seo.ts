@@ -12,13 +12,15 @@ type PageSeo = {
   /** Use the title as-is instead of the "%s | LegatoKeys" template */
   absoluteTitle?: boolean;
   article?: { publishedTime: string; modifiedTime: string; author: string };
+  /** 1200x630 share image; defaults to the site-wide card */
+  image?: { url: string; alt: string };
 };
 
 // Canonical URL + hreflang links so Google treats EN and RU as translations of each other,
 // plus Open Graph / Twitter cards for link previews in messengers and social apps
-export function pageMetadata({ locale, path, title, description, absoluteTitle, article }: PageSeo): Metadata {
+export function pageMetadata({ locale, path, title, description, absoluteTitle, article, image: custom }: PageSeo): Metadata {
   const alt = alternatesFor(path);
-  const image = { url: ogImage(locale), width: 1200, height: 630, alt: site.name };
+  const image = { url: custom?.url ?? ogImage(locale), width: 1200, height: 630, alt: custom?.alt ?? site.name };
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,

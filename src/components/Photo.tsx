@@ -8,6 +8,7 @@ export const photos = {
   "lesson-adults": { widths: [480, 800, 1200], w: 1448, h: 1086 },
   "lesson-advanced": { widths: [480, 800], w: 1122, h: 1402 },
   "studio-room": { widths: [480, 800, 1200], w: 1448, h: 1086 },
+  "first-student": { widths: [480, 800], w: 2560, h: 1791 },
 } as const;
 
 export type PhotoName = keyof typeof photos;

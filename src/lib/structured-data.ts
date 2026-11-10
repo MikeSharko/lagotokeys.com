@@ -2,6 +2,7 @@
 import { site } from "@/config/site";
 import { getDictionary, href, type Locale } from "@/i18n";
 import type { Post } from "./posts";
+import { postImageUrls } from "@/components/blog/PostImage";
 
 const abs = (path: string) => `${site.url}${path}`;
 
@@ -39,7 +40,10 @@ export function blogPostingLd(locale: Locale, post: Post) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
-    image: ogImage(locale),
+    image: (() => {
+      const img = postImageUrls(post.image, site.url);
+      return img ? [img.large, img.og] : ogImage(locale);
+    })(),
     datePublished: post.date,
     dateModified: post.updated,
     inLanguage: locale,

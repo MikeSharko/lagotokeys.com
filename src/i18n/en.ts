@@ -42,7 +42,7 @@ const en = {
     illustration: "A piano lesson with a young student in a home studio in Rancho Peñasquitos, San Diego",
     trialTitle: "Trial lesson · 30 min",
     trialText: "Meet, play, make a plan",
-    fromPrice: (price: string) => `From $${price} / lesson`,
+    lengthBadge: "30 or 60 min lessons",
   },
 
   lessons: {
@@ -64,7 +64,6 @@ const en = {
       { title: "Piano lessons for adults", meta: "30 or 60 min · weekly", badge: "New", alt: "An adult student at a grand piano lesson" },
       { title: "Advanced & concert repertoire", meta: "60 min · weekly", badge: "", alt: "Playing a grand piano in the home studio" },
     ],
-    perLesson: "/ lesson",
     whichLength: "Which length is right?",
     min30: "30 min",
     min60: "60 min",
@@ -75,6 +74,9 @@ const en = {
   teacher: {
     name: "Katerina",
     role: "Piano teacher",
+    photoAlt: "Katerina, piano teacher in San Diego, at the grand piano in her home studio",
+    firstStudent: "Where it all began: Katerina at 18 with her very first student",
+    firstStudentAlt: "Vintage photo: 18-year-old Katerina teaching her first piano student at an upright piano",
     stats: [
       { value: "30", label: "Years teaching" },
       { value: "250+", label: "Students taught" },
@@ -114,6 +116,7 @@ const en = {
       `Every lesson happens in person, in Katerina's home, at a real ${piano} piano. A calm, familiar space where students feel at ease, and where good posture, touch and sound come naturally.`,
     area: "Rancho Peñasquitos, San Diego, CA",
     areaNote: "Exact address shared after booking",
+    hours: "Flexible schedule",
     hoursNote: "After-school and weekend times",
     parking: "Plenty of street parking",
     parkingNote: "Parents are welcome to wait",
@@ -177,7 +180,6 @@ const en = {
 
   trial: {
     label: "Book a trial lesson",
-    perTrial: "/ trial lesson · 30 min",
     who: "Who's learning",
     whoOptions: ["Child (under 12)", "Teen", "Adult"],
     experience: "Experience",
@@ -224,6 +226,7 @@ const en = {
     about: "About",
     blog: "Blog",
     contact: "Contact",
+    madeBy: "Website by",
   },
 
   notFound: {

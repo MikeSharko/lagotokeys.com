@@ -28,6 +28,11 @@ export type PostMeta = {
   tilt: string;
   highlight: "accent" | "ink";
   featured: boolean;
+  /** Cover photo base name in /public/blog (<image>-<width>.webp); null = illustrated keys */
+  image: string | null;
+  /** object-position for the photo crop, e.g. "50% 40%" */
+  imagePosition: string;
+  imageAlt: string;
 };
 
 export type Post = PostMeta & { body: string; faq: FaqItem[] };
@@ -75,6 +80,9 @@ function readPost(locale: Locale, file: string): Post {
     tilt: data.tilt ?? "rotate(-10 160 110) translate(-20 60)",
     highlight: data.highlight === "ink" ? "ink" : "accent",
     featured: Boolean(data.featured),
+    image: data.image ? String(data.image) : null,
+    imagePosition: String(data.imagePosition ?? "50% 50%"),
+    imageAlt: String(data.imageAlt ?? ""),
     body: content,
     faq,
   };
